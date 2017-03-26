@@ -1,0 +1,15 @@
+1. 安装库到本地仓库
+mvn install:install-file -Dfile=<filePath> -DgroupId=<groupId> -DartifactId=<artifactId> -Dversion=<version> -Dpackaging=<packagingType>
+
+2. 安装库到远程仓库
+mvn deploy:deploy-file -Dfile=<filePath> -DgroupId=<groupId> -DartifactId=<artifactId> -Dversion=<version> -Dpackaging=<packagingType> -DrepositoryId=<repositoryId> -Durl=<urlOfTheRepositoryToDeploy>
+mvn deploy:deploy-file -Dfile=<filePath> -DpomFile=<pomFilePath> -DrepositoryId=<repositoryId> -Durl=<urlOfTheRepositoryToDeploy>
+
+
+log4j-api-2.8.1.jar
+mvn install:install-file -Dfile="libs\log4j-api-2.8.1.jar" -DgroupId="com.shuanglong.log4j" -DartifactId="log4j-api" -Dversion="2.8.1" -Dpackaging=jar
+mvn install:install-file -Dfile="libs\log4j-api-2.8.1-sources.jar" -DgroupId="com.shuanglong.log4j" -DartifactId="log4j-api" -Dversion="2.8.1" -Dpackaging=java-source
+
+log4j-core-2.8.1.jar
+mvn install:install-file -Dfile="libs\log4j-core-2.8.1.jar" -DgroupId="com.shuanglong.log4j" -DartifactId="log4j-core" -Dversion="2.8.1" -Dpackaging=jar
+mvn install:install-file -Dfile="libs\log4j-core-2.8.1-sources.jar" -DgroupId="com.shuanglong.log4j" -DartifactId="log4j-core" -Dversion="2.8.1" -Dpackaging=java-source
