@@ -9,6 +9,8 @@ public class NumberUtil
 	
 	public static void TestEntry()
 	{
+        System.out.println( "---------------------------------- NumberUtil Test ----------------------------------" );
+
 		float testFloat = 0.123456789f;
 		
 		byte[] floatByte = new byte[4];
@@ -38,7 +40,6 @@ public class NumberUtil
 		{
 			tempString += String.format("%02X", toPrint[i]);
 		}
-		
-		System.out.println(tempString);
+		log.debug("tempString = " + tempString);
 	}
 }

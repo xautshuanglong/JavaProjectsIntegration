@@ -1,6 +1,7 @@
 package com.shuanglong.JavaProjectsIntegration;
 
 import com.shuanglong.utils.NumberUtil;
+import com.shuanglong.utils.ColorUtil;
 
 public class App 
 {
@@ -8,6 +9,7 @@ public class App
     {
         System.out.println( "================================== Maven Test ==================================" );
         
-        NumberUtil.TestEntry();
+		NumberUtil.TestEntry();
+		ColorUtil.TestEntry();
     }
 }
