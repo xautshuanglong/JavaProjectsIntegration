@@ -1,47 +1,35 @@
 package com.shuanglong.JavaProjectsIntegration;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+import com.shuanglong.utils.MathUtilTest;
+import com.shuanglong.utils.NumberUtilTest;
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
+@RunWith(Suite.class)
+@SuiteClasses
+({
+	MathUtilTest.class,
+	NumberUtilTest.class
+})
+public class AppTest
+{	
+    public AppTest()
     {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
     }
     
-    public void testMySeccessFunc()
+    @BeforeClass
+    public static void beforeClass()
     {
-    	assertEquals(true, true);
+    	System.out.println("AppTest.beforeClass");
     }
     
-//    public void testMyFailureFunc()
-//    {
-//    	assertEquals(true, false);
-//    }
+    @AfterClass
+    public static void afterClass()
+    {
+    	System.out.println("AppTest.afterClass");
+    }
 }
