@@ -9,7 +9,7 @@
 		<property name="every_file_time">5</property>
 		<property name="every_file_size">10M</property>
 		<property name="log_level">debug</property>
-		<property name="log_pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level]-> %msg  --> %l tid=%T%n</property>
+		<property name="log_pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] %msg  --> %l tid=%T%n</property>
 		
 	</properties>
   
