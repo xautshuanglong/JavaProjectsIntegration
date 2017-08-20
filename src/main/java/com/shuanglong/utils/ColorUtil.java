@@ -15,7 +15,7 @@ public class ColorUtil
 
 	public static void TestEntry()
 	{
-        System.out.println( "---------------------------------- ColorUtil Test ----------------------------------" );
+		log.info("-------------------- ColorUtil Test");
 		Color testColor = mInstance.getColor(0x00ff0000);
 		log.debug("testColor=" + testColor.toString());
 		Color testAlphaColor = mInstance.getColor(0x00ff0000, true);

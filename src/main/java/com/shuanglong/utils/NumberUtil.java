@@ -9,7 +9,7 @@ public class NumberUtil
 	
 	public static void TestEntry()
 	{
-        System.out.println( "---------------------------------- NumberUtil Test ----------------------------------" );
+		log.info("-------------------- NumberUtil Test");
 
 		float testFloat = 0.123456789f;
 		

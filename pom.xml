@@ -243,22 +243,24 @@
             </configuration>
           </execution>
         </executions>
-        <configuration>
-          <outputDirectory>${project.basedir}\target\site</outputDirectory>
-          <reportPlugins>
-            <reportPlugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-project-info-reports-plugin</artifactId>
-            </reportPlugin>
-          </reportPlugins>
-        </configuration>
       </plugin>
       
     </plugins>
   </build>
   
   <reporting>
-    <outputDirectory>${project.basedir}\target\site</outputDirectory>
+  	<outputDirectory>${project.basedir}\target\site</outputDirectory>
+  	<!--
+  	<configuration>
+         <outputDirectory>${project.basedir}\target\site</outputDirectory>
+         <reportPlugins>
+            <reportPlugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-project-info-reports-plugin</artifactId>
+            </reportPlugin>
+     	 </reportPlugins>
+     </configuration>
+     -->
   </reporting>
   
 </project>
