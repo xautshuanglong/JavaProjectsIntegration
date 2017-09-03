@@ -1,21 +1,27 @@
 package com.shuanglong.JavaProjectsIntegration;
 
-import com.shuanglong.utils.NumberUtil;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.shuanglong.utils.ColorUtil;
+import com.shuanglong.utils.UtilTestEntry;
 
 public class App 
 {
-	private static Logger log = LogManager.getLogger(Number.class);
+	private static App appInstance = null;
 	
 	public static void main( String[] args )
 	{
-		log.info("==================== Maven Test");
+		appInstance = new App();
 		
-		NumberUtil.TestEntry();
-		ColorUtil.TestEntry();
+		appInstance.AppEntry();   // 应用入口：正式应用
+		appInstance.TestEntry();  // 测试入口：测试专用
+	}
+	
+	private void AppEntry()
+	{
+		;
+	}
+	
+	private void TestEntry()
+	{
+		UtilTestEntry.getInstance().Enter();
+		UtilTestEntry.getInstance().Exit();
 	}
 }
