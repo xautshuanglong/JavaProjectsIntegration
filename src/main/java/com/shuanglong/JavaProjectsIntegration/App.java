@@ -1,5 +1,6 @@
 package com.shuanglong.JavaProjectsIntegration;
 
+import com.shuanglong.attempt.AttemptTestEntry;
 import com.shuanglong.utils.UtilTestEntry;
 
 public class App 
@@ -21,7 +22,11 @@ public class App
 	
 	private void TestEntry()
 	{
+		System.out.println("======================= App.TestEntry() =======================");
 		UtilTestEntry.getInstance().Enter();
 		UtilTestEntry.getInstance().Exit();
+		
+		AttemptTestEntry.getInstance().Enter();
+		AttemptTestEntry.getInstance().Exit();
 	}
 }
