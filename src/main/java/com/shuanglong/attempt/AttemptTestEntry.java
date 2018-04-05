@@ -4,22 +4,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.shuanglong.utils.UtilTestEntry;
-import com.sun.org.apache.bcel.internal.classfile.InnerClass;
 
 public class AttemptTestEntry
 {
 	private static Logger mLogger = LogManager.getLogger(UtilTestEntry.class.getName());
-	
-	private volatile static AttemptTestEntry singleton = new AttemptTestEntry();
+	private static AttemptTestEntry singleton = null;
 	
 	private AttemptTestEntry()
 	{
-		mLogger.info("----> AttemptTestEntry.UtilTestEntry() <----");
 	}
 	
 	public void Enter()
 	{
-		mLogger.info("begin test case ...");
+		mLogger.info("Begin test case ...");
 	}
 	
 	public void Exit()
@@ -29,18 +26,16 @@ public class AttemptTestEntry
 	
 	public static AttemptTestEntry getInstance()
 	{
-		InstancHelpper t1 = new InstancHelpper(1);
-		InstancHelpper t2 = new InstancHelpper(2);
-		return InstancHelpper.singleInstance;
-	}
-	
-	private static class InstancHelpper
-	{
-		private static AttemptTestEntry singleInstance = new AttemptTestEntry();
-		
-		public InstancHelpper(int id)
+		if (singleton == null)
 		{
-			mLogger.info("enter constructor id="+id);
+			synchronized (AttemptTestEntry.class)
+			{
+				if (singleton == null)
+				{
+					singleton = new AttemptTestEntry();
+				}
+			}
 		}
+		return singleton;
 	}
 }

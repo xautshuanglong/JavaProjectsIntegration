@@ -17,7 +17,7 @@ public class App
 	
 	private void AppEntry()
 	{
-		;
+		System.out.println("======================= App.AppEntry() =======================");
 	}
 	
 	private void TestEntry()
