@@ -16,8 +16,9 @@ public class AttemptTestEntry
 	
 	public void Enter()
 	{
-		mLogger.info("Begin test case ...");
-		FastJsonDemo.Enter();
+		mLogger.info("Begin attemption test case ----------");
+//		FastJsonDemo.Enter();
+		DataMiningAlgorithmDemo.Enter();
 	}
 	
 	public void Exit()
