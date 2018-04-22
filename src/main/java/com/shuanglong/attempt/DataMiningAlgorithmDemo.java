@@ -21,8 +21,12 @@ public class DataMiningAlgorithmDemo
 			points = dbscanAnalysis.readFile();
 			System.out.println("------------ After read begin cluster ------------");
 	        dbscanAnalysis.cluster(points);
-	        System.out.println("------------ After cluster begin save result ------------");
+	        System.out.println("------------ After cluster begin partition ------------");
 	        dbscanAnalysis.saveResult();
+	        System.out.println("---------------- Begin k partition ----------------");
+	        dbscanAnalysis.K_Partition();
+	        System.out.println("------------ After partition begin save result ------------");
+	        dbscanAnalysis.savePartitionResult();
 		} catch (Exception e)
 		{
 			// TODO Auto-generated catch block

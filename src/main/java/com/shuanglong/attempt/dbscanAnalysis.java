@@ -14,14 +14,18 @@ public class dbscanAnalysis {
     //    private static final double r = 0.05; // 半径
     private static final double radius = 20; // 半径
     private static final int minPoints = 5;// 密度阈值
+    private static final int kPart = 5;// 划分尺寸大小
     private static List<List<Point>> microCluster = new CopyOnWriteArrayList<List<Point>>();
     private static List<List<Double>> similarityMatrix= new ArrayList<List<Double>>();//存储原始数据集中任意两点之间的距离
+    private static List<List<Point>> kPartitionResult = new ArrayList<List<Point>>();// 存储 K 划分的结果
 
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
         List<Point> points = readFile();
         cluster(points);
         saveResult();
+        K_Partition();
+        savePartitionResult();
         long end = System.currentTimeMillis();
         System.out.println("use time:" + (end - start));
     }
@@ -68,7 +72,7 @@ public class dbscanAnalysis {
      */
     public static void saveResult() throws Exception {
 //        BufferedWriter bw = new BufferedWriter(new FileWriter("src\\com\\wmq\\magic1.txt"));
-        BufferedWriter bw = new BufferedWriter(new FileWriter("src\\main\\resources\\wine_result.txt"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("src\\main\\resources\\wine_dbscan_result.txt"));
         int i = 1;
         for (List<Point> mic : microCluster) {
             bw.write("the " + i + " microCluster:\r\n");
@@ -85,6 +89,25 @@ public class dbscanAnalysis {
         bw.flush();
         bw.close();
     }
+    
+    public static void savePartitionResult() throws Exception {
+      BufferedWriter bw = new BufferedWriter(new FileWriter("src\\main\\resources\\wine_kpartition_result.txt"));
+      int i = 1;
+      for (List<Point> mic : kPartitionResult) {
+          bw.write("the " + i + " partition:\r\n");
+          for (Point p : mic) {
+              StringBuffer sb = new StringBuffer();
+              for (int j = 0; j < p.getLocation().size(); j++) {
+                  sb.append(p.getLocation().get(j) + ",");
+              }
+              bw.write(sb.append(i).toString());
+              bw.newLine();
+          }
+          i++;
+      }
+      bw.flush();
+      bw.close();
+  }
 
     public static double getDistance(Point point1, Point point2) {
         int wide = point1.getLocation().size(); // 共多少维
@@ -179,19 +202,90 @@ public class dbscanAnalysis {
     					rPoint = pointj;
     		    		tPoint = pointk;
     				}
-    				
     			}
     		}
     		
-    		//step2：分别划分r和t点的k-1个等价类
-    		for(int j = 0;j < cluster.size();j++){
-    			//在similarityMatrix中分别查询rPoint、tPoint和本簇中所有点的距离，并分别放着到两距离个List或者Array中，并用两个List分别记录距离对应的Point。
-    			//对两者的距离进行升序排序，注意对距离数组排序后，也要改变point数组中的位置。
-    			//对升序过程中改变了point位置的两个数组分别取前k-1个
+    		// step2-6
+//    		Set<Point> allSet = new HashSet<Point>(cluster);
+    		List<Point> tempClusterCopy = new ArrayList<Point>(cluster); // 拷贝 --> 防止破坏原聚类结果集
+    		while(tempClusterCopy.size() > 0) {
+    			if (tempClusterCopy.size() < kPart) {
+    				// < k （划分到离自己最近的等价类中，在所有已划分的等价类中搜索最近的？？？）
+    				Point curPoint = tempClusterCopy.get(0);
+    				List<Point> assumePart = kPartitionResult.get(0);
+    				assumePart.add(curPoint);
+    				
+    				List<Double> disList = null;
+    				Double assumeDis = Double.MAX_VALUE; // 假定最小距离（点到划分类）
+    				Double disSum = 0.0;
+    				
+    				for (int n=1; n < tempClusterCopy.size(); ++n) {
+    					curPoint = tempClusterCopy.get(n);
+    					for (List<Point> partition : kPartitionResult) {
+    						// 最近的等价类？？？
+    						disSum = 0.0;
+    						disList = getDistances(curPoint, partition);
+    						for(Double dis : disList)
+    							disSum+=dis;
+    						if (disSum < assumeDis)
+    						{
+    							assumeDis = disSum;
+    							assumePart.remove(curPoint);
+    							assumePart = partition;
+    							assumePart.add(curPoint);
+    						}
+    					}
+    				}
+    				tempClusterCopy.clear();
+				}
+    			else if (tempClusterCopy.size() < 2 * kPart){
+    				// < 2k 自成一类
+    				List<Point> partList = new ArrayList<Point>();
+    				partList.addAll(tempClusterCopy);
+    				tempClusterCopy.clear();
+    				kPartitionResult.add(partList);
+    			}
+    			else {
+					// >= 2k 分别以 r和t 为中心划分等价类
+    				List<Point> partSetR = new ArrayList<Point>();
+    				List<Point> partSetT = new ArrayList<Point>();
+    				Point tempPoint = null;
+    				for(int m = 0; m < kPart; ++m) {
+    					tempPoint = getShortestPoint(rPoint, tempClusterCopy);
+    					if (tempPoint != null) {
+							partSetR.add(tempPoint);
+							tempClusterCopy.remove(tempPoint);
+						}
+    					tempPoint = getShortestPoint(tPoint, tempClusterCopy);
+    					if (tempPoint != null) {
+							partSetT.add(tempPoint);
+							tempClusterCopy.remove(tempPoint);
+						}
+    				}
+    				kPartitionResult.add(partSetR);
+    				kPartitionResult.add(partSetT);
+				}
+    			
+    			System.out.println("Kpartition allSet.size()="+tempClusterCopy.size());
     		}
-    		
+    		tempClusterCopy = null;
     	}
     }
-
-
+    
+    public static Point getShortestPoint(Point centerPoint, List<Point> cluster) {
+    	Point retValue = null;
+    	Point targetPoint = null;
+    	Double distance = Double.MAX_VALUE;
+    	Double tempDistance = 0.0;
+    	for (int i=0; i<cluster.size(); ++i)
+    	{
+    		targetPoint = cluster.get(i);
+    		tempDistance = similarityMatrix.get(centerPoint.getId()).get(targetPoint.getId());
+    		if(tempDistance < distance){
+				distance = tempDistance;
+				retValue = targetPoint;
+			}
+    	}
+    	return retValue;
+    }
 }
