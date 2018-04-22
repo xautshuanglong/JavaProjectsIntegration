@@ -27,6 +27,9 @@ public class DataMiningAlgorithmDemo
 	        dbscanAnalysis.K_Partition();
 	        System.out.println("------------ After partition begin save result ------------");
 	        dbscanAnalysis.savePartitionResult();
+	        System.out.println("------------ Begin add laplace noice and save result ------------");
+	        dbscanAnalysis.addLaplaceNoise();
+	        dbscanAnalysis.saveNoiseResult();
 		} catch (Exception e)
 		{
 			// TODO Auto-generated catch block

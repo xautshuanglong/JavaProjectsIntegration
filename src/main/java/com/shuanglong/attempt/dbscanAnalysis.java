@@ -26,6 +26,8 @@ public class dbscanAnalysis {
         saveResult();
         K_Partition();
         savePartitionResult();
+        addLaplaceNoise();
+        saveNoiseResult();
         long end = System.currentTimeMillis();
         System.out.println("use time:" + (end - start));
     }
@@ -108,6 +110,25 @@ public class dbscanAnalysis {
       bw.flush();
       bw.close();
   }
+    
+	public static void saveNoiseResult() throws Exception {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("src\\main\\resources\\wine_noise_result.txt"));
+        int i = 1;
+        for (List<Point> mic : kPartitionResult) {
+            bw.write("the " + i + " partition with noise:\r\n");
+            for (Point p : mic) {
+                StringBuffer sb = new StringBuffer();
+                for (int j = 0; j < p.getLocation().size(); j++) {
+                    sb.append(p.getLocation().get(j) + ",");
+                }
+                bw.write(sb.append(i).toString());
+                bw.newLine();
+            }
+            i++;
+        }
+        bw.flush();
+        bw.close();
+    }
 
     public static double getDistance(Point point1, Point point2) {
         int wide = point1.getLocation().size(); // 共多少维
@@ -287,5 +308,36 @@ public class dbscanAnalysis {
 			}
     	}
     	return retValue;
+    }
+    
+    public static void addLaplaceNoise() {
+    	for (List<Point> partition : kPartitionResult) {
+    		
+    		Double pointsSum = 0.0; // 等价类中元祖总和
+    		int pointCount = 0; // 等价类中元组个数
+    		
+    		int partSize = partition.size();
+    		int locationSize = 0;
+    		
+    		for (int i=0; i<partSize; ++i) {
+    			Point point = partition.get(i);
+    			List<Double> location = point.getLocation();
+    			locationSize = location.size();
+    			for (int j=0; j<locationSize; ++j) {
+    				pointsSum += location.get(j);
+    			}
+    			pointCount += locationSize;
+    		}
+    		Double noise = Noice();
+    		Double xNoise = (pointsSum + noise) / (pointCount + noise);
+    		for (int i=0; i<partSize; ++i) {
+    			Point point = partition.get(i);
+    			List<Double> location = point.getLocation();
+    			locationSize = location.size();
+    			for (int j=0; j<locationSize; ++j) {
+    				location.set(j, xNoise);
+    			}
+    		}
+    	}
     }
 }
