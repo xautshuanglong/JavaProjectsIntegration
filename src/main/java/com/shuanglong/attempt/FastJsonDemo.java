@@ -43,5 +43,9 @@ public class FastJsonDemo
 		
         String json = gson.toJson(p);
         System.out.println(json);
+        
+        Gson gson2 = new Gson();
+        CiticJsonBean p2 = gson2.fromJson(json, CiticJsonBean.class);
+        System.out.println(p2.getBeibaoren().getBbr_name() + "   " + p2.getToubaoren().getTbr_name());
 	}
 }
