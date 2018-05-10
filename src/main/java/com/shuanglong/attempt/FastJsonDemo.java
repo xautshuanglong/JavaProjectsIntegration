@@ -1,6 +1,7 @@
 package com.shuanglong.attempt;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 
 public class FastJsonDemo
 {
@@ -28,5 +29,19 @@ public class FastJsonDemo
 		testObj.put("name", "张爱茹");
 		testObj.put("age", 18);
 		System.out.println(testObj.toJSONString());
+		
+		Gson gson = new Gson();
+		
+		CiticJsonBean p = new CiticJsonBean();
+		CiticJsonBean.TouBaoRen touBaoRen = p.new TouBaoRen();
+		CiticJsonBean.BeiBaoRen beiBaoRen = p.new BeiBaoRen();
+		p.setToubaoren(touBaoRen);
+		p.setBeibaoren(beiBaoRen);
+		
+		beiBaoRen.setBbr_name("test111");
+		touBaoRen.setTbr_name("test222");
+		
+        String json = gson.toJson(p);
+        System.out.println(json);
 	}
 }
