@@ -58,6 +58,10 @@ public class FastJsonDemo
         String json = gson.toJson(pList);
         System.out.println(json);
         
+        Gson gsonPrettyPrint = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
+        String jsonPretty = gsonPrettyPrint.toJson(pList);
+        System.out.println(jsonPretty);
+        
         Gson gson2 = new Gson();
         List<CiticJsonBean> pList2 = gson2.fromJson(json, new TypeToken<List<CiticJsonBean>>() {}.getType());
         for(CiticJsonBean pItem : pList2)
