@@ -1,7 +1,12 @@
 package com.shuanglong.attempt;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 public class FastJsonDemo
 {
@@ -26,26 +31,38 @@ public class FastJsonDemo
 		System.out.println("Age:"+jsonObject.getString("studentAge"));
 		
 		JSONObject testObj = new JSONObject();
-		testObj.put("name", "张爱茹");
+		testObj.put("name", "zhangar");
 		testObj.put("age", 18);
 		System.out.println(testObj.toJSONString());
 		
-		Gson gson = new Gson();
-		
+		Gson gson = new GsonBuilder().serializeNulls().create();
+		List<CiticJsonBean> pList = new ArrayList<CiticJsonBean>();
 		CiticJsonBean p = new CiticJsonBean();
 		CiticJsonBean.TouBaoRen touBaoRen = p.new TouBaoRen();
 		CiticJsonBean.BeiBaoRen beiBaoRen = p.new BeiBaoRen();
 		p.setToubaoren(touBaoRen);
 		p.setBeibaoren(beiBaoRen);
-		
 		beiBaoRen.setBbr_name("test111");
 		touBaoRen.setTbr_name("test222");
+		pList.add(p);
 		
-        String json = gson.toJson(p);
+		p = new CiticJsonBean();
+		touBaoRen = p.new TouBaoRen();
+		beiBaoRen = p.new BeiBaoRen();
+		p.setToubaoren(touBaoRen);
+		p.setBeibaoren(beiBaoRen);
+		beiBaoRen.setBbr_name("test333");
+		touBaoRen.setTbr_name("test444");
+		pList.add(p);
+		
+        String json = gson.toJson(pList);
         System.out.println(json);
         
         Gson gson2 = new Gson();
-        CiticJsonBean p2 = gson2.fromJson(json, CiticJsonBean.class);
-        System.out.println(p2.getBeibaoren().getBbr_name() + "   " + p2.getToubaoren().getTbr_name());
+        List<CiticJsonBean> pList2 = gson2.fromJson(json, new TypeToken<List<CiticJsonBean>>() {}.getType());
+        for(CiticJsonBean pItem : pList2)
+        {
+        	System.out.println(pItem.getBeibaoren().getBbr_name() + "   " + pItem.getToubaoren().getTbr_name());
+        }
 	}
 }
