@@ -32,7 +32,6 @@ public class DataMiningAlgorithmDemo
 	        dbscanAnalysis.saveNoiseResult();
 		} catch (Exception e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

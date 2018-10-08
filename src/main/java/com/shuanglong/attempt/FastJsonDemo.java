@@ -16,7 +16,6 @@ public class FastJsonDemo
 	
 	public FastJsonDemo()
 	{
-		// TODO Auto-generated constructor stub
 	}
 	
 	public static void Enter()

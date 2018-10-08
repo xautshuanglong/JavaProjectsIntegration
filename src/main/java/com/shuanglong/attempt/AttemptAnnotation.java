@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
  * @Author    JiangShuanglong
  * @Email     xjshuanglong@126.com
  * @Date      2017-08-26 23:12:44
- * @Desc      TODO 
+ * @Desc      Annotation test
  */
 public class AttemptAnnotation
 {
