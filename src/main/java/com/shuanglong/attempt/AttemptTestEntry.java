@@ -16,14 +16,15 @@ public class AttemptTestEntry
 	
 	public void Enter()
 	{
-		mLogger.info("Begin attemption test case ----------");
-		FastJsonDemo.Enter();
+		mLogger.info("------------------------ AttemptTestEntry.Enter() ------------------------");
+//		FastJsonDemo.Enter();
 //		DataMiningAlgorithmDemo.Enter();
+		FopDemo.Enter();
 	}
 	
 	public void Exit()
 	{
-		;
+		mLogger.info("------------------------ AttemptTestEntry.Exit() ------------------------");
 	}
 	
 	public static AttemptTestEntry getInstance()

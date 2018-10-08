@@ -9,7 +9,7 @@ public class UtilTestEntry
 	
 	private UtilTestEntry()
 	{
-		mLogger.info("----> UtilTestEntry.UtilTestEntry() <----");
+//		mLogger.info("----> UtilTestEntry.UtilTestEntry() <----");
 	}
 	
 	public static UtilTestEntry getInstance()
@@ -21,8 +21,8 @@ public class UtilTestEntry
 	{
 		mLogger.info("------------------------ UtilTestEntry.Enter() ------------------------");
 		
-		NumberUtil.TestEntry();
-		ColorUtil.TestEntry();
+//		NumberUtil.TestEntry();
+//		ColorUtil.TestEntry();
 	}
 	
 	public void Exit()
