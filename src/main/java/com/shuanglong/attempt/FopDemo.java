@@ -75,7 +75,8 @@ public class FopDemo
 		    Transformer xsltTrans = factory.newTransformer(xslt);
 		    Result resXslt = new SAXResult(fopXslt.getDefaultHandler());
 		    xsltTrans.transform(xmlSrc, resXslt);
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -91,7 +92,8 @@ public class FopDemo
 				{
 					outXslt.close();
 				}
-			} catch (IOException e)
+			}
+			catch (IOException e)
 			{
 				e.printStackTrace();
 			}
