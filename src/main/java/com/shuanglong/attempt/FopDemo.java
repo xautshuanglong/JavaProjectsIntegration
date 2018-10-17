@@ -67,6 +67,7 @@ public class FopDemo
 		    transformer.transform(src, res);
 		    
 		    // Temp test added by Shuanglong (xml + xsl --> pdf)
+		    
 		    outXslt = new BufferedOutputStream(new FileOutputStream(new File("E:/Temp/FopTest/name.pdf")));
 		    Fop fopXslt = fopFactory.newFop(MimeConstants.MIME_PDF, outXslt);
 		    Source xmlSrc = new StreamSource(new File("E:/Temp/FopTest/name.xml"));
@@ -74,8 +75,7 @@ public class FopDemo
 		    Transformer xsltTrans = factory.newTransformer(xslt);
 		    Result resXslt = new SAXResult(fopXslt.getDefaultHandler());
 		    xsltTrans.transform(xmlSrc, resXslt);
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -91,8 +91,7 @@ public class FopDemo
 				{
 					outXslt.close();
 				}
-			}
-			catch (IOException e)
+			} catch (IOException e)
 			{
 				e.printStackTrace();
 			}
