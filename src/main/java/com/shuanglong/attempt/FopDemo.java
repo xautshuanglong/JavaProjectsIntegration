@@ -67,7 +67,6 @@ public class FopDemo
 		    transformer.transform(src, res);
 		    
 		    // Temp test added by Shuanglong (xml + xsl --> pdf)
-		    
 		    outXslt = new BufferedOutputStream(new FileOutputStream(new File("E:/Temp/FopTest/name.pdf")));
 		    Fop fopXslt = fopFactory.newFop(MimeConstants.MIME_PDF, outXslt);
 		    Source xmlSrc = new StreamSource(new File("E:/Temp/FopTest/name.xml"));
