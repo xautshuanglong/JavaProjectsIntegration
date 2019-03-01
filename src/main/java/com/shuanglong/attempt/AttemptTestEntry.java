@@ -19,7 +19,17 @@ public class AttemptTestEntry
 		mLogger.info("------------------------ AttemptTestEntry.Enter() ------------------------");
 //		FastJsonDemo.Enter();
 //		DataMiningAlgorithmDemo.Enter();
-		FopDemo.Enter();
+//		FopDemo.Enter();
+		
+		boolean testFlag = false;
+		if ("true".equals(String.valueOf(testFlag)))
+		{
+		    mLogger.info("Y==true actual is " + testFlag);
+		}
+		else
+		{
+		    mLogger.info("Y==false actual is " + testFlag);
+		}
 	}
 	
 	public void Exit()
