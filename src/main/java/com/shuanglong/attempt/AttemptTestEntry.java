@@ -24,11 +24,11 @@ public class AttemptTestEntry
 		boolean testFlag = false;
 		if ("true".equals(String.valueOf(testFlag)))
 		{
-		    mLogger.info("Y==true actual is " + testFlag);
+		    mLogger.info("Bingo switch actual is " + testFlag);
 		}
 		else
 		{
-		    mLogger.info("Y==false actual is " + testFlag);
+		    mLogger.info("Bingo switch actual is " + testFlag);
 		}
 	}
 	
