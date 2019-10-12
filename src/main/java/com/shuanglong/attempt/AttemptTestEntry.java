@@ -20,24 +20,7 @@ public class AttemptTestEntry
 //		FastJsonDemo.Enter();
 //		DataMiningAlgorithmDemo.Enter();
 //		FopDemo.Enter();
-		
-		short a, b, c;
-		a = 2;
-		b = 3;
-		c = (short)(a + b);
-		
-		System.out.println("a+b:" + (a+b));
-		System.out.println("c:" + c);
-		
-		boolean testFlag = false;
-		if ("true".equals(String.valueOf(testFlag)))
-		{
-		    mLogger.info("Bingo switch actual is " + testFlag);
-		}
-		else
-		{
-		    mLogger.info("Bingo switch actual is " + testFlag);
-		}
+		AttemptRandom.Enter();
 	}
 	
 	public void Exit()
