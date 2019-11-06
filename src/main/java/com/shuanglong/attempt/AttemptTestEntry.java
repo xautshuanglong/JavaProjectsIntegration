@@ -20,7 +20,9 @@ public class AttemptTestEntry
 //		FastJsonDemo.Enter();
 //		DataMiningAlgorithmDemo.Enter();
 //		FopDemo.Enter();
-		AttemptRandom.Enter();
+//		AttemptRandom.Enter();
+		
+		XmlRpc.XmlRpcClientTest();
 	}
 	
 	public void Exit()
