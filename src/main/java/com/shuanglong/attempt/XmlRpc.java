@@ -20,10 +20,10 @@ public class XmlRpc {
 			XmlRpcClient client = new XmlRpcClient();
 			client.setConfig(config);
 
-			ArrayList<String> params = new ArrayList<String>();
-			params.add("flyoung");
-			String result = (String) client.execute("get_string", params);
-			System.out.println("result:" + result);
+			ArrayList<String> strParams = new ArrayList<String>();
+			strParams.add("flyoung");
+			String strRes = (String) client.execute("get_string", strParams);
+			System.out.println("result:" + strRes);
 			
 			Random forceRandom = new Random();
 			ArrayList<Double[]> args = new ArrayList<>();
@@ -34,19 +34,16 @@ public class XmlRpc {
 			}
 			args.add(realtime_force);
 			Object setResult = client.execute("set_realtime_force", args);
-			System.out.println(setResult);
+			System.out.println("set_realtime_force: " + setResult);
 			
 			ArrayList<Double[]> args2 = new ArrayList<>();
 			Object getResult = client.execute("get_realtime_force", args2);
 			if (getResult instanceof Object[])
             {
-			    System.out.println("Bingo");
 			    Object[] resultArray = (Object[]) getResult;
 			    for (int i=0; i<resultArray.length; ++i)
 			    {
 			        System.out.println(resultArray[i]);
-//			        double temp = (double)resultArray[i];
-//			        System.out.println("Double: " + temp);
 			    }
             }
 			else
@@ -54,6 +51,38 @@ public class XmlRpc {
 			    System.out.println("False");
 			    System.out.println(getResult);
 			}
+			
+			ArrayList<Integer> intParams = new ArrayList<Integer>();
+			intParams.add(300);
+			client.execute("set_data", intParams);
+			intParams.clear();
+			Integer intRes = (Integer) client.execute("get_data", intParams);
+            System.out.println("set_data 300, get_data " + intRes);
+			
+            intParams.clear();
+            intParams.add(3);
+            intParams.add(6);
+            intRes = (Integer) client.execute("add", intParams);
+            System.out.println(intParams.get(0) + " + " + intParams.get(1) + " = " + intRes);
+            
+            intParams.clear();
+            intParams.add(3);
+            intParams.add(5);
+            Double divRes = (Double) client.execute("div", intParams);
+            System.out.println(intParams.get(0) + " / " + intParams.get(1) + " = " +divRes);
+            
+            intParams.clear();
+            intParams.add(3);
+            intParams.add(5);
+            intRes = (Integer) client.execute("math_add", intParams);
+            System.out.println(intParams.get(0) + " + " + intParams.get(1) + " = " + intRes);
+            
+            intParams.clear();
+            intParams.add(3);
+            intParams.add(4);
+//            params.add(0);
+            divRes = (Double) client.execute("math_div", intParams);
+            System.out.println(intParams.get(0) + " / " + intParams.get(1) + " = " + divRes);
 			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
