@@ -5,14 +5,20 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
-public class XmlRpc {
+public class XmlRpc
+{
+    private static Logger mgLogger = LogManager.getLogger(XmlRpc.class.getName());
 
-	static public void XmlRpcClientTest() {
-		try {
+	static public void XmlRpcClientTest()
+    {
+		try
+        {
 			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 			config.setServerURL(new URL("http://localhost:8888/RPC2"));
 			config.setConnectionTimeout(5000);
@@ -83,11 +89,27 @@ public class XmlRpc {
 //            params.add(0);
             divRes = (Double) client.execute("math_div", intParams);
             System.out.println(intParams.get(0) + " / " + intParams.get(1) + " = " + divRes);
-			
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (XmlRpcException e) {
-			e.printStackTrace();
+		}
+        catch (MalformedURLException e)
+        {
+			String errorMsg = "Malformed URL";
+            StackTraceElement[] stackTraces = e.getStackTrace();
+            for (StackTraceElement stackTrace : stackTraces)
+            {
+                errorMsg += "\n\tat " + stackTrace.toString();
+            }
+            System.out.println(errorMsg);
+            mgLogger.error(errorMsg);
+		}
+        catch (XmlRpcException e)
+        {
+			String errorMsg = "XML RPC Error: ";
+            StackTraceElement[] stackTraces = e.getStackTrace();
+            for (StackTraceElement stackTrace : stackTraces)
+            {
+                errorMsg += "\n\tat " + stackTrace.toString();
+            }
+            mgLogger.error(errorMsg);
 		}
 	}
 }

@@ -127,7 +127,6 @@
 					<arguments>
 						<argument>-classpath</argument>
 						<classpath></classpath>
-						>
 						<argument>com.shuanglong.JavaProjectsIntegration.App</argument>
 					</arguments>
 				</configuration>
@@ -182,6 +181,10 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
 				<executions>
 					<execution>
 						<id>default-compile</id>
