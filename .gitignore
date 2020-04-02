@@ -2,3 +2,9 @@
 /target/
 /logs/
 /.classpath
+
+/wine_result.txt
+/wine_dbscan_result.txt
+/wine_kpartition_result.txt
+/wine_noise_result.txt
+
