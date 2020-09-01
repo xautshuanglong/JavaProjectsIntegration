@@ -1,6 +1,6 @@
 package com.shuanglong.attempt;
 
-public class AttemptEnumType 
+public class AttemptEnumType
 {
-	;
+    ;
 }
