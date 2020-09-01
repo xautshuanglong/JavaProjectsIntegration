@@ -1,10 +1,13 @@
 .DS_Store
 /target/
 /logs/
-/.classpath
+
+.classpath
+.settings
+.idea
+*.iml
 
 /wine_result.txt
 /wine_dbscan_result.txt
 /wine_kpartition_result.txt
 /wine_noise_result.txt
-
