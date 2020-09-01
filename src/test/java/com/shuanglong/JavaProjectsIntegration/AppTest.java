@@ -11,25 +11,25 @@ import com.shuanglong.utils.NumberUtilTest;
 
 @RunWith(Suite.class)
 @SuiteClasses
-({
-	MathUtilTest.class,
-	NumberUtilTest.class
-})
+        ({
+                MathUtilTest.class,
+                NumberUtilTest.class
+        })
 public class AppTest
-{	
+{
     public AppTest()
     {
     }
-    
+
     @BeforeClass
     public static void beforeClass()
     {
-    	System.out.println("AppTest.beforeClass");
+        System.out.println("AppTest.beforeClass");
     }
-    
+
     @AfterClass
     public static void afterClass()
     {
-    	System.out.println("AppTest.afterClass");
+        System.out.println("AppTest.afterClass");
     }
 }

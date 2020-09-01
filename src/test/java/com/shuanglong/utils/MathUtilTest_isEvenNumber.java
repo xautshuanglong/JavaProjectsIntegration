@@ -13,32 +13,32 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class MathUtilTest_isEvenNumber
 {
-	private int nNumber;
-	private boolean nTarget;
-	
-	public MathUtilTest_isEvenNumber(int number, boolean target)
-	{
-		nNumber = number;
-		nTarget = target;
-	}
-	
-	@Parameters
-	public static Collection<Object[]> prepareAddParams()
-	{
-		List<Object[]> params = null;
-		params = Arrays.asList(new Object[][]
-		{
-			{1, false},
-			{2, true},
-			{4, true}
-		});
-		
-		return params;
-	}
-	
-	@Test
-	public void testIsEvenNumber()
-	{
-		Assert.assertEquals(nTarget, MathUtil.isEvenNumber(nNumber));
-	}
+    private int nNumber;
+    private boolean nTarget;
+
+    public MathUtilTest_isEvenNumber(int number, boolean target)
+    {
+        nNumber = number;
+        nTarget = target;
+    }
+
+    @Parameters
+    public static Collection<Object[]> prepareAddParams()
+    {
+        List<Object[]> params = null;
+        params = Arrays.asList(new Object[][]
+                {
+                        {1, false},
+                        {2, true},
+                        {4, true}
+                });
+
+        return params;
+    }
+
+    @Test
+    public void testIsEvenNumber()
+    {
+        Assert.assertEquals(nTarget, MathUtil.isEvenNumber(nNumber));
+    }
 }
