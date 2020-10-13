@@ -39,33 +39,13 @@ public class AttemptRandom
             }
         }
 
-        System.out.printf("\n\n");
+        System.out.println("\n\n");
 
         Random randomDouble = new Random(1);
-        for (int i = 0; i < total; i++)
-        {
-            double randomDoubleN = randomDouble.nextDouble();
-            System.out.printf("%25.18f", randomDoubleN);
-            if ((i + 1) % col == 0)
-            {
-                System.out.println();
-            }
-        }
+        PrintRandomDouble(col, total, randomDouble);
 
-        System.out.printf("\n\n");
-
-        Random randomDoubleCopy = new Random(1);
-        for (int i = 0; i < total; i++)
-        {
-            double randomDoubleN = randomDoubleCopy.nextDouble();
-            System.out.printf("%25.18f", randomDoubleN);
-            if ((i + 1) % col == 0)
-            {
-                System.out.println();
-            }
-        }
-
-        System.out.printf("\n\n");
+        randomDouble.setSeed(1);
+        PrintRandomDouble(col, total, randomDouble);
 
         Random randomInt = new Random(1);
         for (int i = 0; i < total; i++)
@@ -96,5 +76,20 @@ public class AttemptRandom
                 System.out.println();
             }
         }
+    }
+
+    private void PrintRandomDouble(int col, int total, Random randomDouble)
+    {
+        for (int i = 0; i < total; i++)
+        {
+            double randomDoubleN = randomDouble.nextDouble();
+            System.out.printf("%25.18f", randomDoubleN);
+            if ((i + 1) % col == 0)
+            {
+                System.out.println();
+            }
+        }
+
+        System.out.printf("\n\n");
     }
 }
