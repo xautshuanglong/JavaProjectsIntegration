@@ -7,8 +7,8 @@ import org.apache.logging.log4j.Logger;
 
 public class AttemptRandom
 {
-    private static Logger logger = LogManager.getLogger(AttemptRandom.class);
-    static private AttemptRandom instance = new AttemptRandom();
+    static private final Logger logger = LogManager.getLogger(AttemptRandom.class);
+    static private final AttemptRandom instance = new AttemptRandom();
 
     public AttemptRandom()
     {
@@ -58,12 +58,12 @@ public class AttemptRandom
             }
         }
 
-        System.out.printf("\n\n");
+        System.out.println("\n\n");
 
 //        long oldseed = 1L;
 //        long oldseed = 1L ^ 25214903917L;
         long oldseed = 25214903916L; // 相当于构造 Random 时初始种子为 1
-        long nextseed = 0L;
+        long nextseed;
         for (int i = 0; i < total; i++)
         {
             nextseed = (oldseed * 25214903917L + 11L) & 281474976710655L;
@@ -90,6 +90,6 @@ public class AttemptRandom
             }
         }
 
-        System.out.printf("\n\n");
+        System.out.println("\n\n");
     }
 }
